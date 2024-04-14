@@ -21,7 +21,12 @@
 
 <script setup lang="ts">
 import * as similarityUtils from 'src/utils/utils';
+import { useTextComparationStore } from 'src/stores/text-comparation-store';
+import { useCounterStore } from 'src/stores/example-store';
 import { ref } from 'vue';
+
+const textComparationStore = useTextComparationStore();
+const counterStore = useCounterStore();
 
 defineOptions({
   name: 'IndexPage'
@@ -29,10 +34,11 @@ defineOptions({
 
 const textarea1 = ref<string>('');
 const textarea2 = ref<string>('');
-
 const stringSimilarity = ref<string>('');
 
 function computeStringSimilarity() {
   stringSimilarity.value = similarityUtils.similarityToPercentage(similarityUtils.jaccardSimilarity(textarea1.value, textarea2.value));
+  counterStore.increment();
+  textComparationStore.addTextComparation(counterStore.counter, textarea1.value, textarea2.value, stringSimilarity.value);
 }
 </script>
