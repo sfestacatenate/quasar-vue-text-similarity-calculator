@@ -13,6 +13,7 @@
 import { QTable, QTableProps } from 'quasar';
 import { TextComparation } from 'src/components/models';
 import { useTextComparationStore } from 'src/stores/text-comparation-store';
+import { truncateString } from 'src/utils/utils';
 import { ref } from 'vue';
 const textComparationStore = useTextComparationStore();
 
@@ -23,7 +24,7 @@ const columns: QTableProps['columns'] = [
     label: 'Text 1',
     align: 'left',
     field: row => row.text1,
-    format: val => `${val}`,
+    format: val => `${truncateString(val)}`,
     sortable: true
   },
   {
@@ -31,7 +32,7 @@ const columns: QTableProps['columns'] = [
     label: 'Text 2',
     align: 'left',
     field: row => row.text2,
-    format: val => `${val}`,
+    format: val => `${truncateString(val)}`,
     sortable: true
   },
   { name: 'percentage', label: 'Percentage', field: 'percentage', sortable: true },

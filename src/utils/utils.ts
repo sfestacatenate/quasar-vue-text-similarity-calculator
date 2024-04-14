@@ -27,3 +27,7 @@ export function similarityToPercentage(similarity: number): string {
   const percentage = (similarity * 100).toFixed(2);
   return `${percentage}%`;
 }
+
+export function truncateString(str: string): string {
+  return str.length > 50 ? str.slice(0, 47) + '...' : str;
+}
